@@ -1,0 +1,52 @@
+CREATE DATABASE FarmaciaLasBuenaSS;
+USE FarmaciaLasBuenaSS;
+
+CREATE TABLE Proveedor (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    telefono VARCHAR(20),
+    direccion VARCHAR(255),
+    correo_electronico VARCHAR(100)
+);
+
+INSERT INTO Proveedor (nombre, telefono, direccion, correo_electronico)
+VALUES 
+('Laboratorios Pharma S.A.', '2222-1234', 'Av. Norte 12, San Salvador', 'ventas@pharmalab.com'),
+('Distribuidora Salud Integral', '2255-4321', 'Calle Central 45, San Miguel', 'contacto@saludintegral.com'),
+('Farmacéuticos Unidos', '2277-5678', 'Blvd. Norte 65, Santa Ana', 'info@farmaunidos.com');
+
+
+CREATE TABLE Medicamento (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL,
+    fecha_expiracion DATE,
+    id_proveedor INT,
+    FOREIGN KEY (id_proveedor) REFERENCES Proveedor(id)
+);
+
+INSERT INTO Medicamento (nombre, descripcion, precio, stock, fecha_expiracion, id_proveedor)
+VALUES 
+('Paracetamol', 'Analgésico y antipirético', 1.50, 100, '2025-12-31', 1),
+('Ibuprofeno', 'Analgésico, antiinflamatorio', 3.20, 50, '2024-08-15', 2),
+('Amoxicilina', 'Antibiótico de amplio espectro', 5.00, 75, '2023-11-30', 1),
+('Omeprazol', 'Inhibidor de la bomba de protones', 2.80, 30, '2024-06-01', 3),
+('Cetirizina', 'Antihistamínico', 2.00, 120, '2024-12-15', 2);
+
+
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255),
+    cargo VARCHAR(100),
+    correo_electronico VARCHAR(100),
+    usuario VARCHAR(255),
+    contrasena VARCHAR(255),
+    rol VARCHAR(100)
+);
+
+INSERT INTO usuario (nombre, cargo, correo_electronico, usuario, contrasena, rol)
+VALUES 
+('Ana Pérez', 'Administrador', 'ana.perez@farmacia.com', 'admin', '202cb962ac59075b964b07152d234b70', 'admin'),
+('Carlos López', 'Vendedor', 'carlos.lopez@farmacia.com', 'vendedor', '202cb962ac59075b964b07152d234b70', 'vendedor');
